@@ -13,6 +13,16 @@
 #   end
 #
 class ActiveForm < ActiveRecord::Base
+  # Define fields. Each parameter is a new field to be defined
+  def self.set_fields(*new_fields)
+    new_fields.each { |c| column c }
+  end
+  
+  # Alias to set_fields
+  def self.set_columns(*params)
+    set_fields(*params)
+  end
+  
   def self.columns # :nodoc:
     @columns ||= []
   end

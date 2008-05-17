@@ -4,9 +4,19 @@ require 'active_record'
 require File.dirname(__FILE__) + '/../lib/active_form'
 require 'test/unit'
 
+
 class ActiveFormTest < Test::Unit::TestCase
   def test_class_loads
     assert_nothing_raised { ActiveForm }
+  end
+  
+  def test_can_add_batch_columns
+    self.class.class_eval %q{
+      class CanAddBatchColumns < ActiveForm
+        set_columns :one, :two, :three
+      end
+    }
+    assert_equal 3, CanAddBatchColumns.columns.size
   end
   
   def test_can_add_columns
